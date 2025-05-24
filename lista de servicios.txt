@@ -1,0 +1,57 @@
+{{access_token}}
+
+register →s
+
+login →s
+
+generos.listar →s 
+
+generos.buscar →s 
+
+generos.crear →s
+
+generos.eliminar →s (elimina todos los registros asociados)
+
+generos.editar →s
+
+autores.listar →s
+
+autores.buscar →s 
+
+autores.crear →s
+
+autores.eliminar →s (elimina todos los registros asociados)
+
+autores.editar →s 
+
+libros.listar →s
+
+libros.buscar →
+
+libros.crear →s
+
+libros.eliminar →s
+
+libros.editar →s
+
+calificaciones.listar →s
+
+calificaciones.buscar →s
+
+calificaciones.crear →s
+
+calificaciones.eliminar →s
+
+calificaciones.editar
+
+
+
+
+Obs: 
+    - verificar todos los servicios para mostrar cero registros cuando no hay
+    - agregar audiotoria a todas las tablas
+    - aumentar vida de token 
+    - el eliminar no sea en cascada, sea si no hay otro registro asociado apara poder eliminar
+    - en la tabla libros agregar path
+    
+
