@@ -2,9 +2,17 @@ from rest_framework import serializers
 from .models import AutorModel
 
 class AutorSerializer(serializers.ModelSerializer):
+    usuario_creador_username = serializers.CharField(source='usuario_creador.username', read_only=True)
+
     class Meta:
         model = AutorModel
-        fields = '__all__'
+        fields = [
+            'id',
+            'nombre',
+            'fecha_creacion',
+            'fecha_modificacion',
+            'usuario_creador_username'
+        ]
         read_only_fields = ('usuario_creador', 'fecha_creacion', 'fecha_modificacion')
 
     def create(self, validated_data):
