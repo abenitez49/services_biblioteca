@@ -62,6 +62,8 @@ biblioteca/
 └── manage.py
 📸 Capturas del collection de postman 
 * Collection en postman todas las carpetas comparten el mismo contenido formato
+
+
 ![postmancollection](screenshots/postmancollection.PNG)
 
 
