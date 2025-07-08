@@ -8,7 +8,7 @@ Proyecto de backend en Python usando Django y Django REST Framework, que permite
 
 1. Clonar el repositorio:
 
-```bash
+
 git clone [https://github.com/tu-usuario/tu-repo.git](https://github.com/abenitez49/services_biblioteca.git)
 cd project_libreria
 Crear entorno virtual e instalar dependencias:
