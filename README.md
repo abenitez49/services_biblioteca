@@ -64,7 +64,7 @@ biblioteca/
 * Collection en postman todas las carpetas comparten el mismo contenido formato
 
 
-![postmancollection](screenshots/postmancollection.PNG)
+![Captura Postman](./screenshots/postmancollection.PNG)
 
 
 
