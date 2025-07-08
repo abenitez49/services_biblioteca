@@ -9,21 +9,17 @@ Proyecto de backend en Python usando Django y Django REST Framework, que permite
 1. Clonar el repositorio:
 
 ```bash
-git clone https://github.com/tu-usuario/tu-repo.git
-cd tu-repo
+git clone [https://github.com/tu-usuario/tu-repo.git](https://github.com/abenitez49/services_biblioteca.git)
+cd project_libreria
 Crear entorno virtual e instalar dependencias:
 
-bash
-Copiar
-Editar
+
 python -m venv venv
 .\venv\Scripts\activate
 pip install -r requirements.txt
 Si no tenés un requirements.txt, podés instalar manualmente con:
 
-bash
-Copiar
-Editar
+
 pip install django
 pip install djangorestframework
 pip install djangorestframework-simplejwt
@@ -33,36 +29,43 @@ pip install psycopg2
 pip install django-cors-headers
 Migraciones e iniciar servidor:
 
-bash
-Copiar
-Editar
+
 python manage.py migrate
 python manage.py runserver
+
 🧠 ¿Qué hace este sistema?
-Alta, baja, modificación y listado de libros.
+Alta, baja, modificación y listado de autores, generos, libros y calificaciones.Tambien registro de usuarios y login de los mismos, atravez de inicio de sesion se obtiene el token necesario para realizar las peticiones a los servicios el metodo de autenticacion es 'Bearer Token'.
 
 Asociación de libros con autores y clasificaciones.
 
-Carga y almacenamiento de PDFs de libros en carpeta storage/.
+Carga y almacenamiento de en formato correspondiente utilizamos como ejemplo los libros electronicos cuyo formato estan en epub de libros en carpeta media/{idlibro}/[nombre libro].
 
 Endpoint de búsqueda de libros por ID con validación de existencia.
 
-Clasificaciones con modelo de embebido (por implementar).
+Clasificaciones con modelo de (embeading) (por implementar).........
+*
+*
+*
+*
 
 API limpia y funcional, con JWT para autenticación.
 
 📁 Estructura del proyecto
-bash
-Copiar
-Editar
+
 biblioteca/
+├── autores/
+├── calificaciones/
+├── generos/
 ├── libros/
-│   ├── models.py  # Modelos de Libro, Autor, Clasificación
-│   ├── views.py   # API CRUD
-│   └── serializers.py
-├── storage/       # PDFs almacenados
+├── media/       # PDFs almacenados
+├── utils/
 └── manage.py
-📸 Capturas del código y funcionamiento
+📸 Capturas del collection de postman 
+
+
+
+
+
 📘 Crear un libro
 python
 Copiar
