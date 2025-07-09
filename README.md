@@ -3,7 +3,8 @@
 ````markdown
 # 📚 Sistema de Gestión de Biblioteca - Django + DRF
 
-Proyecto de backend en Python usando Django y Django REST Framework, que permite la administración de una biblioteca con funcionalidades para manejar libros, autores y clasificaciones. También permite almacenar el archivo libro electrónico y realizar análisis sobre valoraciones usando Pandas.
+Proyecto de backend en Python usando Django y Django REST Framework, que permite la administración de una biblioteca con funcionalidades para 
+manejar libros, autores y clasificaciones. También permite almacenar el archivo libro electrónico y realizar análisis sobre valoraciones usando Pandas.
 
 ---
 
