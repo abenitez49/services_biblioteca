@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist', 
     'django_extensions',
     'corsheaders',
+    'django.contrib.postgres',
 ]
 
 # Para que DRF use SimpleJWT como autenticación por defecto:

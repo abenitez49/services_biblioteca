@@ -13,12 +13,9 @@ git clone [https://github.com/tu-usuario/tu-repo.git](https://github.com/abenite
 cd project_libreria
 Crear entorno virtual e instalar dependencias:
 
-
+2. Crear entorno virtual e instalar dependencias
 python -m venv venv
 .\venv\Scripts\activate
-pip install -r requirements.txt
-Si no tenés un requirements.txt, podés instalar manualmente con:
-
 
 pip install django
 pip install djangorestframework
@@ -33,14 +30,19 @@ Migraciones e iniciar servidor:
 python manage.py migrate
 python manage.py runserver
 
-🧠 ¿Qué hace este sistema?
-Alta, baja, modificación y listado de autores, generos, libros y calificaciones.Tambien registro de usuarios y login de los mismos, atravez de inicio de sesion se obtiene el token necesario para realizar las peticiones a los servicios el metodo de autenticacion es 'Bearer Token'.
+🧠 ¿Qué funcionalidades ofrece?
+✅ Registro y login de usuarios con JWT (Bearer Token)
+✅ ABM de autores, géneros, libros y calificaciones
+✅ Asociación de libros con autores y géneros
+✅ Carga de libros en formato .epub en la carpeta media/{idlibro}/[nombre libro].epub
+✅ Endpoint de búsqueda de libros con validación
+✅ Carga y visualización de calificaciones con embeddings
+✅ Gráficos automáticos con Pandas/Matplotlib
+✅ Recomendaciones de libros por género basadas en promedio de valoraciones
+✅ Análisis e insights estadísticos sobre las valoraciones
+✅ Sistema extendible y limpio
 
-Asociación de libros con autores y clasificaciones.
-
-Carga y almacenamiento de en formato correspondiente utilizamos como ejemplo los libros electronicos cuyo formato estan en epub de libros en carpeta media/{idlibro}/[nombre libro].
-
-Endpoint de búsqueda de libros por ID con validación de existencia.
+✅ Se adjunta el git del front que se realizo consumiendo los servicios de este sistema: https://github.com/abenitez49/services_biblioteca_vue
 
 Clasificaciones con modelo de (embeading) (por implementar).........
 *
@@ -60,6 +62,8 @@ biblioteca/
 ├── media/       # PDFs almacenados
 ├── utils/
 └── manage.py
+
+
 📸 Capturas del collection de postman 
 * Collection en postman todas las carpetas comparten el mismo contenido formato
 
@@ -70,50 +74,79 @@ biblioteca/
 
 
 📘 Crear un libro
-python
-Copiar
-Editar
+
 # views.py
-class LibroCreateAPIView(APIView):
-    def post(self, request):
-        # lógica para crear libro...
+def post(self, request):
+        serializer = LibrosSerializer(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response({
+                'success': True,
+                'message': 'Libro creado correctamente.',
+                'data': serializer.data
+            }, status=status.HTTP_201_CREATED)
+        return Response({
+            'success': False,
+            'message': 'Error al crear el libro.',
+            'errors': serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 📚 Listado de libros
-python
-Copiar
-Editar
+
 # views.py
-class LibroListAPIView(APIView):
-    def get(self, request):
-        # lógica para listar libros...
+def get(self, request):
+        libros = LibrosModel.objects.all()
+        serializer = LibrosSerializer(libros, many=True)
+        return Response({
+            'success': True,
+            'message': 'Libros obtenidos correctamente.',
+            'data': serializer.data,
+            'count': len(serializer.data)
+        }, status=status.HTTP_200_OK)
 
-📊 Valoraciones y análisis con Pandas
-Usamos Pandas para analizar valoraciones de libros:
 
-python
-Copiar
-Editar
-import pandas as pd
 
-df = pd.read_csv('valoraciones.csv')
-valoradas = df.groupby("genero")["puntuacion"].mean()
-print(valoradas)
+📈 Análisis con Pandas
+En analisisdatos/analisis_calificaciones.py se encuentra el script que permite:
+
+Calcular y graficar el promedio de valoraciones por género
+
+Mostrar:
+
+📉 Libro peor valorado
+
+📊 Libro más calificado (más valoraciones recibidas)
+
+🌟 Libro más recomendado (mayor promedio de puntuación)
+
+Permitir al usuario ingresar un ID de género y sugerir el libro más recomendado en base al promedio de calificaciones.
+
+📚 Géneros disponibles:
+  📘 1 - Ciencia Ficción
+  📘 2 - Fantasía
+  📘 3 - Romance
+
+🔎 Ingresá el ID del género para sugerir el mejor libro: 2
+
+✅ El libro más recomendado del género 'Fantasía' es:
+📕 El ojo del samurai (promedio: 4.80)
+
+
+
+
 📈 Gráficos generados
 Género más valorado
 
-
-Pregunta de análisis libre
-¿Cuáles son los autores con más libros valorados positivamente?
+![Captura Grafico de valoracion](./screenshots/promedioValoracionesPorGenero.png)
 
 
-💡 Sugerencias por género
-Al seleccionar un género, el sistema puede recomendar libros del mismo género que hayan sido bien valorados.
 
-🧪 Embedding de calificaciones (pendiente)
-📝 Sección vacía – próximamente se integrará un sistema de embeddings para análisis semántico de valoraciones.
+🔍 Sugerencias y futuros análisis
+📘 Recomendaciones por género basadas en promedio de puntuación ✅
 
-🐼 Integración avanzada con Pandas (pendiente)
-📝 Sección vacía – se agregará procesamiento adicional de datasets con Pandas, exploración de patrones, etc.
+🧠 Integración de embeddings para análisis semántico de valoraciones (pendiente)
+
+📊 Análisis de patrones de usuarios, sentimientos y recomendaciones automáticas (en desarrollo)
 
 🔒 Licencia
 Este proyecto está bajo la licencia Alexis. Consultá el archivo LICENSE para más información.

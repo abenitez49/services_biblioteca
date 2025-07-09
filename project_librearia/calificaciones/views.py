@@ -1,10 +1,13 @@
+# clasificaciones/views.py
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import CalificacionModel
 from .serializers import CalificacionSerializer
+from sentence_transformers import SentenceTransformer
 
-# Reutilizamos la misma función para formatear la respuesta
+embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+
 def response_format(success=True, message="", data=None, count=None, http_status=status.HTTP_200_OK):
     response = {
         "status": success,
@@ -14,6 +17,12 @@ def response_format(success=True, message="", data=None, count=None, http_status
     if count is not None:
         response["count"] = count
     return Response(response, status=http_status)
+
+def create_embedding(text):
+    if not text:
+        return None
+    vector = embedding_model.encode(text)
+    return vector.tolist()
 
 class CalificacionApiView(APIView):
     def get(self, request):
@@ -29,10 +38,13 @@ class CalificacionApiView(APIView):
     def post(self, request):
         serializer = CalificacionSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
-            serializer.save()
+            descripcion = serializer.validated_data.get('descripcion', '')
+            embedding_vector = create_embedding(descripcion)
+            # Guardamos el embedding junto a la creación
+            calificacion = serializer.save(embedding=embedding_vector)
             return response_format(
                 message="Calificación creada exitosamente",
-                data=serializer.data,
+                data=CalificacionSerializer(calificacion).data,
                 http_status=status.HTTP_201_CREATED
             )
         return response_format(
@@ -74,10 +86,12 @@ class CalificacionApiViewDetail(APIView):
             )
         serializer = CalificacionSerializer(calificacion, data=request.data, context={'request': request})
         if serializer.is_valid():
-            serializer.save()
+            descripcion = serializer.validated_data.get('descripcion', '')
+            embedding_vector = create_embedding(descripcion)
+            calificacion = serializer.save(embedding=embedding_vector)
             return response_format(
                 message="Calificación actualizada exitosamente",
-                data=serializer.data,
+                data=CalificacionSerializer(calificacion).data,
                 http_status=status.HTTP_200_OK
             )
         return response_format(
