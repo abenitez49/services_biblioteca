@@ -154,7 +154,7 @@ En `analisisdatos/analisis_calificaciones.py` se encuentra el script que permite
 ✅ El libro más recomendado del género 'Fantasía' es:
 📕 El ojo del samurai (promedio: 4.80)
 ```
-![Captura cmd de libro mejor valorado por genero](./screenshots/libroMasRecomendadoPorGenero.png)
+![Captura cmd de libro mejor valorado por genero](./screenshots/libroMasRecomendadoPorGenero.PNG)
 ---
 
 ## 📈 Gráficos generados
