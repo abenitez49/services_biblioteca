@@ -1,6 +1,6 @@
 # 📚 Sistema de Gestión de Biblioteca - Django + DRF
 
-Proyecto de backend en Python usando Django y Django REST Framework, que permite la administración de una biblioteca con funcionalidades para manejar libros, autores y clasificaciones. También permite almacenar PDFs y realizar análisis sobre valoraciones usando Pandas.
+Proyecto de backend en Python usando Django y Django REST Framework, que permite la administración de una biblioteca con funcionalidades para manejar libros, autores y clasificaciones. También permite almacenar el archivo libro electronico y realizar análisis sobre valoraciones usando Pandas.
 
 ---
 
@@ -9,28 +9,31 @@ Proyecto de backend en Python usando Django y Django REST Framework, que permite
 1. Clonar el repositorio:
 
 
-git clone [https://github.com/tu-usuario/tu-repo.git](https://github.com/abenitez49/services_biblioteca.git)
+git clone https://github.com/abenitez49/services_biblioteca.git
+
 cd project_libreria
+
 Crear entorno virtual e instalar dependencias:
 
 2. Crear entorno virtual e instalar dependencias
-python -m venv venv
-.\venv\Scripts\activate
+✅ python -m venv venv
+✅ .\venv\Scripts\activate
 
-pip install django
-pip install djangorestframework
-pip install djangorestframework-simplejwt
-pip install django_extensions
-pip install psycopg
-pip install psycopg2
-pip install django-cors-headers
-Migraciones e iniciar servidor:
+✅ pip install django
+✅ pip install djangorestframework
+✅ pip install djangorestframework-simplejwt
+✅ pip install django_extensions
+✅ pip install psycopg
+✅ pip install psycopg2
+✅ pip install django-cors-headers
 
 
-python manage.py migrate
-python manage.py runserver
+2.1 Migraciones e iniciar servidor:
 
-🧠 ¿Qué funcionalidades ofrece?
+✅ python manage.py migrate
+✅ python manage.py runserver
+
+3. ¿Qué funcionalidades ofrece?
 ✅ Registro y login de usuarios con JWT (Bearer Token)
 ✅ ABM de autores, géneros, libros y calificaciones
 ✅ Asociación de libros con autores y géneros
@@ -44,15 +47,9 @@ python manage.py runserver
 
 ✅ Se adjunta el git del front que se realizo consumiendo los servicios de este sistema: https://github.com/abenitez49/services_biblioteca_vue
 
-Clasificaciones con modelo de (embeading) (por implementar).........
-*
-*
-*
-*
 
-API limpia y funcional, con JWT para autenticación.
 
-📁 Estructura del proyecto
+4. 📁 Estructura del proyecto
 
 biblioteca/
 ├── autores/
@@ -60,7 +57,9 @@ biblioteca/
 ├── generos/
 ├── libros/
 ├── media/       # PDFs almacenados
+├── project_libreria/
 ├── utils/
+├── screenshots/ #imagenes
 └── manage.py
 
 
@@ -71,7 +70,7 @@ biblioteca/
 ![Captura Postman](./screenshots/postmancollection.PNG)
 
 
-
+📸 Pequeñas secciones de codigo
 
 📘 Crear un libro
 
@@ -106,7 +105,8 @@ def get(self, request):
 
 
 
-📈 Análisis con Pandas
+5. Análisis con Pandas
+
 En analisisdatos/analisis_calificaciones.py se encuentra el script que permite:
 
 Calcular y graficar el promedio de valoraciones por género
@@ -135,13 +135,14 @@ Permitir al usuario ingresar un ID de género y sugerir el libro más recomendad
 
 
 📈 Gráficos generados
-Género más valorado
+Género más valorado (en el momento de haer este readme con los datos existentes)
 
 ![Captura Grafico de valoracion](./screenshots/promedioValoracionesPorGenero.png)
 
 
 
 🔍 Sugerencias y futuros análisis
+
 📘 Recomendaciones por género basadas en promedio de puntuación ✅
 
 🧠 Integración de embeddings para análisis semántico de valoraciones (pendiente)
